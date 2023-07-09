@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Ejercicios de manejo de módulos | 11r">
+    <meta itemprop="description" content="Vamos a trabajar con ejercicios sobre paquetería.">
+
+    
+    <meta name="twitter:title" content="Ejercicios de manejo de módulos | 11r">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Vamos a trabajar con ejercicios sobre paquetería.">
+    <meta name="twitter:site" content="@ReeseCodes">
+    <meta name="twitter:creator" content="@ReeseCodes">
+    <meta name="twitter:image:src" content="https://reeseschultz.github.io/11r/twitter.jpg">
+
+    
+    <meta name="og:title" content="Ejercicios de manejo de módulos | 11r">
+    <meta name="og:description" content="Vamos a trabajar con ejercicios sobre paquetería.">
+    <meta name="og:image" content="https://reeseschultz.github.io/11r/og.jpg">
+    <meta name="og:url" content="https://reeseschultz.github.io/11r/">
+    <meta name="og:site_name" content="11r">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/x-icon" href="/11r/favicon.ico" />
+
+    <title>Ejercicios de manejo de módulos | 11r</title>
+
+    <link rel="stylesheet" href="/11r/assets/main.bundle.css">
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <p class="top-notice">
+    <a href="https://github.com/reeseschultz/11r">Get the template on GitHub!</a>
+</p>
+
+    <header>
+  <nav class="container mx-auto max-w-3xl px-8 pt-2 flex flex-wrap justify-between">
+    <div>
+      <h1>
+        <a href="/11r/">11r</a>
+      </h1>
+      <p>america&#39;s favorite eleventy blog template</p>
+    </div>
+
+    <ul class="flex flex-wrap sm:w-32 w-full mt-6 md:justify-between justify-evenly">
+      <li>
+        <a href="/11r/404.html">404</a>
+      </li>
+
+      <li>
+        <a href="/11r/about">About</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-3xl p-8 grow">
+      
+    <p></p>
+    <div>
+        <h2>Ejercicios de manejo de módulos</h2>
+
+        
+            <p class="excerpt">Vamos a trabajar con ejercicios sobre paquetería.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag ASO" href="/11r/tag/ASO">ASO</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Thu Nov 03 2022 01:00:00 GMT+0100 (hora estándar de Europa central)">November 3, 2022</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#1.-comprueba-los-m%C3%B3dulos-cargados-en-tu-equipo.">1. Comprueba los módulos cargados en tu equipo.</a>
+            		</li>
+
+                    <li><a href="#2.-cuenta-el-n%C3%BAmero-de-m%C3%B3dulos-disponibles-en-el-n%C3%BAcleo-que-est%C3%A1s-usando.">2. Cuenta el número de módulos disponibles en el núcleo que estás usando.</a>
+            		</li>
+
+                    <li><a href="#3.-conecta-un-l%C3%A1piz-usb-y-observa-la-salida-de-la-instrucci%C3%B3n-sudo-dmesg.">3. Conecta un lápiz USB y observa la salida de la instrucción sudo dmesg.</a>
+            		</li>
+
+                    <li><a href="#4.-elimina-el-m%C3%B3dulo-correspondiente-a-alg%C3%BAn-dispotivo-no-esencial-y-comprueba-qu%C3%A9-ocurre.-vuelve-a-cargarlo.">4. Elimina el módulo correspondiente a algún dispotivo no esencial y comprueba qué ocurre. Vuelve a cargarlo.</a>
+            		</li>
+
+                    <li><a href="#5.-selecciona-un-m%C3%B3dulo-que-est%C3%A9-en-uso-en-tu-equipo-y-configura-el-arranque-para-que-no-se-cargue-autom%C3%A1ticamente.">5. Selecciona un módulo que esté en uso en tu equipo y configura el arranque para que no se cargue automáticamente.</a>
+            		</li>
+
+                    <li><a href="#6.-carga-el-m%C3%B3dulo-loop%2C-obt%C3%A9n-informaci%C3%B3n-de-qu%C3%A9-es-y-para-qu%C3%A9-sirve.-lista-el-contenido-de-%2Fsys%2Fmodules%2Floop%2Fparameters-y-configura-el-equipo-para-que-se-puedan-cargar-como-m%C3%A1ximo-12-dispositvos-loop-la-pr%C3%B3xima-vez-que-se-arranque.">6. Carga el módulo loop, obtén información de qué es y para qué sirve. Lista el contenido de /sys/modules/loop/parameters y configura el equipo para que se puedan cargar como máximo 12 dispositvos loop la próxima vez que se arranque.</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <h3 id="1.-comprueba-los-m%C3%B3dulos-cargados-en-tu-equipo." tabindex="-1">1. Comprueba los módulos cargados en tu equipo.</h3>
+<p>Para ver los módulos cargados de mi equipo, usamos el siguiente comando:</p>
+<pre class="language-bash"><code class="language-bash">$ lsmod</code></pre>
+<p><img src="/img/ASO-P4.1.png" alt="Imagen no encontrada: /img/ASO-P4.1.png" title="Imagen no encontrada: /img/ASO-P4.1.png">
+lsmod, lo que hace es leer el contenido del archivo /proc/modules.</p>
+<h3 id="2.-cuenta-el-n%C3%BAmero-de-m%C3%B3dulos-disponibles-en-el-n%C3%BAcleo-que-est%C3%A1s-usando." tabindex="-1">2. Cuenta el número de módulos disponibles en el núcleo que estás usando.</h3>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">ls</span> -R /lib/modules/<span class="token variable"><span class="token variable">$(</span><span class="token function">uname</span> -r<span class="token variable">)</span></span> <span class="token operator">|</span> <span class="token function">wc</span> -l</code></pre>
+<p><img src="/img/ASO-P4.2.png" alt="ASO-P4.2.png"></p>
+<h3 id="3.-conecta-un-l%C3%A1piz-usb-y-observa-la-salida-de-la-instrucci%C3%B3n-sudo-dmesg." tabindex="-1">3. Conecta un lápiz USB y observa la salida de la instrucción sudo dmesg.</h3>
+<p>he ejecutado el siguiente comando:</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">dmesg</span> -w</code></pre>
+<p>lo que hace el parametro -w es que se actualiza en el momento el comando, y al añadir el Pen-Drive se han añadido estas líneas:</p>
+<p><img src="/img/ASO-P4-3.png" alt="ASO-P4.3.png"></p>
+<h3 id="4.-elimina-el-m%C3%B3dulo-correspondiente-a-alg%C3%BAn-dispotivo-no-esencial-y-comprueba-qu%C3%A9-ocurre.-vuelve-a-cargarlo." tabindex="-1">4. Elimina el módulo correspondiente a algún dispotivo no esencial y comprueba qué ocurre. Vuelve a cargarlo.</h3>
+<p>Vamos a eliminar el modulo usb storage, pero al hacer un lsmod vemos que usb_storage depende de uas, entonces, tenemos que eliminar el modulo uas primero y despues el de usb-storage.</p>
+<pre class="language-bash"><code class="language-bash">$ modprobe -r uas<br>$ modprobe -r usb_storage</code></pre>
+<p><img src="/img/ASO-P4.4.png" alt="ASO-P4.4.png"></p>
+<h3 id="5.-selecciona-un-m%C3%B3dulo-que-est%C3%A9-en-uso-en-tu-equipo-y-configura-el-arranque-para-que-no-se-cargue-autom%C3%A1ticamente." tabindex="-1">5. Selecciona un módulo que esté en uso en tu equipo y configura el arranque para que no se cargue automáticamente.</h3>
+<p>Editamos el siguiente fichero:</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/modprobe.d/blacklist.conf</code></pre>
+<p>Añadimos lo siguiente:</p>
+<pre class="language-txt"><code class="language-txt">blacklist [nombre_modulo]</code></pre>
+<p>Una vez hecho esto ejecutamos el siguiente comando para actualizar:</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> update-initramfs -u</code></pre>
+<h3 id="6.-carga-el-m%C3%B3dulo-loop%2C-obt%C3%A9n-informaci%C3%B3n-de-qu%C3%A9-es-y-para-qu%C3%A9-sirve.-lista-el-contenido-de-%2Fsys%2Fmodules%2Floop%2Fparameters-y-configura-el-equipo-para-que-se-puedan-cargar-como-m%C3%A1ximo-12-dispositvos-loop-la-pr%C3%B3xima-vez-que-se-arranque." tabindex="-1">6. Carga el módulo loop, obtén información de qué es y para qué sirve. Lista el contenido de /sys/modules/loop/parameters y configura el equipo para que se puedan cargar como máximo 12 dispositvos loop la próxima vez que se arranque.</h3>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> modprobe loop</code></pre>
+<p><img src="/img/ASO-P4.6.png" alt="ASO-P4.6.png"></p>
+<p><img src="/img/ASO-P4.7.png" alt="ASO-P4.7.png"></p>
+<p>editamos el siguiente fichero:</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/modules</code></pre>
+<p>añadimos lo siguiente:</p>
+<pre class="language-txt"><code class="language-txt">options loop max_loop=12</code></pre>
+<p>Una vez hecho esto ejecutamos el siguiente comando para actualizar:</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> update-initramfs -u</code></pre>
+<h2 id="documento-realizado-por%3A" tabindex="-1"><strong>Documento realizado por:</strong></h2>
+<p>✒️ <strong>Alejandro Montes Delgado</strong> - <em>2º ASIR</em></p>
+
+        </div>
+    </div>
+
+    </main>
+    <footer class="bg-gray-900 pb-10">
+  <p class="block text-center text-sm mb-6">
+    Built by
+    <a target="_blank" href="https://github.com/reeseschultz">
+      Reese Schultz
+    </a>
+  </p>
+
+  <a class="block text-center text-sm" href="/11r/privacy-policy">Privacy Policy</a>
+</footer>
+    <div id="privacy-notice" style="height: 5em" class="sticky bottom-0 py-5 px-2 bg-gray-800 w-full flex justify-center">
+    <p class="px-2 text-sm self-center">By using this site, you agree that you have read and understand its <a href="/11r/privacy-policy">Privacy Policy</a>.</p>
+    <button aria-label="dismiss" style="height: 32px; width: 32px" class="flex justify-center align-center" id="privacy-notice-button-container">
+        <svg id="privacy-notice-button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg> 
+    </button>
+</div>
+
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/11r/assets/main.bundle.js"></script>
+  </body>
+</html>

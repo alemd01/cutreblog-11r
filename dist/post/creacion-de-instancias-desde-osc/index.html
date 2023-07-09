@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Creación de instancias desde OSC | 11r">
+    <meta itemprop="description" content="Vamos a trabajar con OpenStack Client.">
+
+    
+    <meta name="twitter:title" content="Creación de instancias desde OSC | 11r">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Vamos a trabajar con OpenStack Client.">
+    <meta name="twitter:site" content="@ReeseCodes">
+    <meta name="twitter:creator" content="@ReeseCodes">
+    <meta name="twitter:image:src" content="https://reeseschultz.github.io/11r/twitter.jpg">
+
+    
+    <meta name="og:title" content="Creación de instancias desde OSC | 11r">
+    <meta name="og:description" content="Vamos a trabajar con OpenStack Client.">
+    <meta name="og:image" content="https://reeseschultz.github.io/11r/og.jpg">
+    <meta name="og:url" content="https://reeseschultz.github.io/11r/">
+    <meta name="og:site_name" content="11r">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/x-icon" href="/11r/favicon.ico" />
+
+    <title>Creación de instancias desde OSC | 11r</title>
+
+    <link rel="stylesheet" href="/11r/assets/main.bundle.css">
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <p class="top-notice">
+    <a href="https://github.com/reeseschultz/11r">Get the template on GitHub!</a>
+</p>
+
+    <header>
+  <nav class="container mx-auto max-w-3xl px-8 pt-2 flex flex-wrap justify-between">
+    <div>
+      <h1>
+        <a href="/11r/">11r</a>
+      </h1>
+      <p>america&#39;s favorite eleventy blog template</p>
+    </div>
+
+    <ul class="flex flex-wrap sm:w-32 w-full mt-6 md:justify-between justify-evenly">
+      <li>
+        <a href="/11r/404.html">404</a>
+      </li>
+
+      <li>
+        <a href="/11r/about">About</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-3xl p-8 grow">
+      
+    <p></p>
+    <div>
+        <h2>Creación de instancias desde OSC</h2>
+
+        
+            <p class="excerpt">Vamos a trabajar con OpenStack Client.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag ASO" href="/11r/tag/ASO">ASO</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Thu Nov 03 2022 01:00:00 GMT+0100 (hora estándar de Europa central)">November 3, 2022</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+
+            <ol>
+<li>Instala el cliente de línea de comando de OpenStack cómo se muestra en <a href="https://github.com/josedom24/curso_openstack_ies/blob/main/modulo1/osc.md">Instalación y uso básico de OpenStack client (OSC)</a>.</li>
+</ol>
+<p>Primero vamos a crear un entorno virtual donde vamos a trabajar con OpenStack client, para ello instalaremos python y venv si es necesario.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> python3 python3-venv<br><span class="token function">mkdir</span> venv<br><span class="token builtin class-name">cd</span> venv</code></pre>
+<p>Activamos el entorno virtual con el siguiente comando:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> osc<br>python3 -m venv osc</code></pre>
+<p>Usamos el siguiente comando para instalar en el entorno virtual el cliente de openstack:</p>
+<pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> python-openstackclient<span class="token operator">==</span><span class="token number">5.8</span>.0</code></pre>
+<ol start="3">
+<li>Descarga de Horizon tu fichero de credenciales, cargálo y ejecuta la instrucción <code>openstack server list</code> para visualizar tus instancias.</li>
+</ol>
+<p>Una vez descargado el fichero, realizamos lo siguiente:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">source</span> crendenciales.sh</code></pre>
+<p>tendríamos que insertar la contraseña con la que entramos a openstack y ya podríamos interactuar con el servidor openstack.</p>
+<ol start="5">
+<li>Vamos a crear una instancia y la vamos a configurar con <a href="https://github.com/josedom24/curso_openstack_ies/blob/main/modulo3/cloudinit.md"><strong>cloud-init</strong></a>, para ello crea un fichero <code>cloud-config.yaml</code> con el siguiente contenido:</li>
+</ol>
+<pre class="language-yaml"><code class="language-yaml">    <span class="token comment">#cloud-config</span><br>         <span class="token key atrule">package_update</span><span class="token punctuation">:</span> <span class="token boolean important">true</span><br>         <span class="token key atrule">package_upgrade</span><span class="token punctuation">:</span> <span class="token boolean important">true</span><br>         <span class="token key atrule">preserve_hostname</span><span class="token punctuation">:</span> <span class="token boolean important">false</span><br>         <span class="token key atrule">fqdn</span><span class="token punctuation">:</span> test1.gonzalonazareno.org<br>         <span class="token key atrule">hostname</span><span class="token punctuation">:</span> prueba<span class="token punctuation">-</span>alemd<br>         <span class="token comment"># Crear un usuario y añadir clave pública ssh</span><br>         <span class="token key atrule">users</span><span class="token punctuation">:</span><br>           <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> jose<br>             <span class="token key atrule">sudo</span><span class="token punctuation">:</span> ALL=(ALL) NOPASSWD<span class="token punctuation">:</span>ALL<br>             <span class="token key atrule">shell</span><span class="token punctuation">:</span> /bin/bash<br>             <span class="token key atrule">passwd</span><span class="token punctuation">:</span> asdasd<br>             <span class="token key atrule">ssh_authorized_keys</span><span class="token punctuation">:</span><br>             <span class="token comment"># Clave pública de nuestra máquina.</span><br>               <span class="token punctuation">-</span> ssh<span class="token punctuation">-</span>rsa <br>           <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> alemd<br>             <span class="token key atrule">sudo</span><span class="token punctuation">:</span> ALL=(ALL) NOPASSWD<span class="token punctuation">:</span>ALL<br>             <span class="token key atrule">shell</span><span class="token punctuation">:</span> /bin/bash<br>             <span class="token key atrule">passwd</span><span class="token punctuation">:</span> usuario<br>           <span class="token comment">#  ssh_authorized_keys:</span><br>             <span class="token comment"># Clave pública de nuestra máquina.</span><br>             <span class="token comment">#  - ssh-rsa </span><br><br>         <span class="token key atrule">chpasswd</span><span class="token punctuation">:</span><br>           <span class="token key atrule">list</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"><br>             root:asdasd</span><br>           <span class="token key atrule">expire</span><span class="token punctuation">:</span> <span class="token boolean important">False</span></code></pre>
+<p>Modifica el fichero e indica un nombre a la máquina, crea otro usuario y cambia las contraseñas.</p>
+<p>Este fichero actualizará la paquetería de la instancia, configurará el FQDN de la instancia, creará un nuevo usuario y cambiará la contraseña del usuario <code>root</code>.</p>
+<ol start="4">
+<li>Siguiendo el apartado <a href="https://github.com/josedom24/curso_openstack_ies/blob/main/modulo3/osc_nova.md">Gestión de instancia con OpenStack client (OSC)</a>, visualiza con el OSC los flavors disponibles, imágenes disponibles, claves disponibles, reglas de cortafuegos,…</li>
+<li>Crea una nueva instancia usando el comando que encontrarás en la sección <a href="https://github.com/josedom24/curso_openstack_ies/blob/main/modulo1/osc.md">Configuración de instancias con cloud-init</a>.</li>
+<li>Añade una IP flotante a la instancia para ello puedes usar los comandos que encuentras en <a href="https://github.com/josedom24/curso_openstack_ies/blob/main/modulo3/osc_nova.md">Gestión de instancia con OpenStack client (OSC)</a>.</li>
+<li>Accede por ssh (recuerda usar el usuario que has creado con cloud-init) a la instancia.</li>
+</ol>
+<h2 id="documento-realizado-por%3A" tabindex="-1"><strong>Documento realizado por:</strong></h2>
+<p>✒️ <strong>Alejandro Montes Delgado</strong> - <em>2º ASIR</em></p>
+
+        </div>
+    </div>
+
+    </main>
+    <footer class="bg-gray-900 pb-10">
+  <p class="block text-center text-sm mb-6">
+    Built by
+    <a target="_blank" href="https://github.com/reeseschultz">
+      Reese Schultz
+    </a>
+  </p>
+
+  <a class="block text-center text-sm" href="/11r/privacy-policy">Privacy Policy</a>
+</footer>
+    <div id="privacy-notice" style="height: 5em" class="sticky bottom-0 py-5 px-2 bg-gray-800 w-full flex justify-center">
+    <p class="px-2 text-sm self-center">By using this site, you agree that you have read and understand its <a href="/11r/privacy-policy">Privacy Policy</a>.</p>
+    <button aria-label="dismiss" style="height: 32px; width: 32px" class="flex justify-center align-center" id="privacy-notice-button-container">
+        <svg id="privacy-notice-button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg> 
+    </button>
+</div>
+
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/11r/assets/main.bundle.js"></script>
+  </body>
+</html>

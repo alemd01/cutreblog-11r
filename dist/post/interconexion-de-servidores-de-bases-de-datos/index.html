@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Interconexión de Servidores de Bases de datos | 11r">
+    <meta itemprop="description" content="En este articulo, veremos como compilar un kernel linux a medida.">
+
+    
+    <meta name="twitter:title" content="Interconexión de Servidores de Bases de datos | 11r">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="En este articulo, veremos como compilar un kernel linux a medida.">
+    <meta name="twitter:site" content="@ReeseCodes">
+    <meta name="twitter:creator" content="@ReeseCodes">
+    <meta name="twitter:image:src" content="https://reeseschultz.github.io/11r/twitter.jpg">
+
+    
+    <meta name="og:title" content="Interconexión de Servidores de Bases de datos | 11r">
+    <meta name="og:description" content="En este articulo, veremos como compilar un kernel linux a medida.">
+    <meta name="og:image" content="https://reeseschultz.github.io/11r/og.jpg">
+    <meta name="og:url" content="https://reeseschultz.github.io/11r/">
+    <meta name="og:site_name" content="11r">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/x-icon" href="/11r/favicon.ico" />
+
+    <title>Interconexión de Servidores de Bases de datos | 11r</title>
+
+    <link rel="stylesheet" href="/11r/assets/main.bundle.css">
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <p class="top-notice">
+    <a href="https://github.com/reeseschultz/11r">Get the template on GitHub!</a>
+</p>
+
+    <header>
+  <nav class="container mx-auto max-w-3xl px-8 pt-2 flex flex-wrap justify-between">
+    <div>
+      <h1>
+        <a href="/11r/">11r</a>
+      </h1>
+      <p>america&#39;s favorite eleventy blog template</p>
+    </div>
+
+    <ul class="flex flex-wrap sm:w-32 w-full mt-6 md:justify-between justify-evenly">
+      <li>
+        <a href="/11r/404.html">404</a>
+      </li>
+
+      <li>
+        <a href="/11r/about">About</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-3xl p-8 grow">
+      
+    <p></p>
+    <div>
+        <h2>Interconexión de Servidores de Bases de datos</h2>
+
+        
+            <p class="excerpt">En este articulo, veremos como compilar un kernel linux a medida.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag GBD" href="/11r/tag/GBD">GBD</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Wed Nov 16 2022 01:00:00 GMT+0100 (hora estándar de Europa central)">November 16, 2022</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+
+            <h1 id="interconexi%C3%B3n-de-servidores-de-bases-de-datos." tabindex="-1">Interconexión de Servidores de Bases de Datos.</h1>
+<h2 id="1.-realizar-un-enlace-entre-dos-servidores-de-bases-de-datos-oracle%2C-explicando-la-configuraci%C3%B3n-necesaria-en-ambos-extremos-y-demostrando-su-funcionamiento." tabindex="-1">1. Realizar un enlace entre dos servidores de bases de datos ORACLE, explicando la configuración necesaria en ambos extremos y demostrando su funcionamiento.</h2>
+<p>En el escenario, tenemos 2 servidores Oracle, uno creado en mi propio sistema debian y otro en una máquina virtual debian. Ambos se conectan a través de una red virtual. Lo primero que haremos, es crear un usuario en cada servidor con los privilegios suficientes para poder realizar la interconexión.</p>
+<p>El usuario del servidor 1:</p>
+<p><img src="/img/BD-P2.2.png" alt="BD-P2.2.png"></p>
+<p>El usuario del servidor 2:</p>
+<p><img src="/img/BD-P2.1.png" alt="BD-P2.1.png"></p>
+<p>He añadido como ejemplo el esquema SCOTT para poder visualizar algunas tablas. Vamos a configurar el archivo <code>tnsntames.ora</code>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /opt/oracle/product/19c/dbhome_1/network/admin/tnsnames.ora</code></pre>
+<pre class="language-bash"><code class="language-bash">RCLCDB <span class="token operator">=</span><br>  <span class="token punctuation">(</span>DESCRIPTION <span class="token operator">=</span><br>    <span class="token punctuation">(</span>ADDRESS <span class="token operator">=</span> <span class="token punctuation">(</span>PROTOCOL <span class="token operator">=</span> TCP<span class="token punctuation">)</span><span class="token punctuation">(</span>HOST <span class="token operator">=</span> <span class="token number">192.168</span>.122.97<span class="token punctuation">)</span><span class="token punctuation">(</span>PORT <span class="token operator">=</span> <span class="token number">1521</span><span class="token punctuation">))</span><br>    <span class="token punctuation">(</span>CONNECT_DATA <span class="token operator">=</span><br>      <span class="token punctuation">(</span>SERVER <span class="token operator">=</span> DEDICATED<span class="token punctuation">)</span><br>      <span class="token punctuation">(</span>SERVICE_NAME <span class="token operator">=</span> ORCLCDB<span class="token punctuation">)</span><br>    <span class="token punctuation">)</span><br>  <span class="token punctuation">)</span></code></pre>
+<hr>
+<h2 id="documento-realizado-por%3A" tabindex="-1"><strong>Documento realizado por:</strong></h2>
+<p>✒️ <strong>Alejandro Montes Delgado</strong> - <em>2º ASIR</em></p>
+
+        </div>
+    </div>
+
+    </main>
+    <footer class="bg-gray-900 pb-10">
+  <p class="block text-center text-sm mb-6">
+    Built by
+    <a target="_blank" href="https://github.com/reeseschultz">
+      Reese Schultz
+    </a>
+  </p>
+
+  <a class="block text-center text-sm" href="/11r/privacy-policy">Privacy Policy</a>
+</footer>
+    <div id="privacy-notice" style="height: 5em" class="sticky bottom-0 py-5 px-2 bg-gray-800 w-full flex justify-center">
+    <p class="px-2 text-sm self-center">By using this site, you agree that you have read and understand its <a href="/11r/privacy-policy">Privacy Policy</a>.</p>
+    <button aria-label="dismiss" style="height: 32px; width: 32px" class="flex justify-center align-center" id="privacy-notice-button-container">
+        <svg id="privacy-notice-button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg> 
+    </button>
+</div>
+
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/11r/assets/main.bundle.js"></script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Ejercicios de modificación de parámetros del kérnel | 11r">
+    <meta itemprop="description" content="america&#39;s favorite eleventy blog template">
+
+    
+    <meta name="twitter:title" content="Ejercicios de modificación de parámetros del kérnel | 11r">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="america&#39;s favorite eleventy blog template">
+    <meta name="twitter:site" content="@ReeseCodes">
+    <meta name="twitter:creator" content="@ReeseCodes">
+    <meta name="twitter:image:src" content="https://reeseschultz.github.io/11r/twitter.jpg">
+
+    
+    <meta name="og:title" content="Ejercicios de modificación de parámetros del kérnel | 11r">
+    <meta name="og:description" content="america&#39;s favorite eleventy blog template">
+    <meta name="og:image" content="https://reeseschultz.github.io/11r/og.jpg">
+    <meta name="og:url" content="https://reeseschultz.github.io/11r/">
+    <meta name="og:site_name" content="11r">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/x-icon" href="/11r/favicon.ico" />
+
+    <title>Ejercicios de modificación de parámetros del kérnel | 11r</title>
+
+    <link rel="stylesheet" href="/11r/assets/main.bundle.css">
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <p class="top-notice">
+    <a href="https://github.com/reeseschultz/11r">Get the template on GitHub!</a>
+</p>
+
+    <header>
+  <nav class="container mx-auto max-w-3xl px-8 pt-2 flex flex-wrap justify-between">
+    <div>
+      <h1>
+        <a href="/11r/">11r</a>
+      </h1>
+      <p>america&#39;s favorite eleventy blog template</p>
+    </div>
+
+    <ul class="flex flex-wrap sm:w-32 w-full mt-6 md:justify-between justify-evenly">
+      <li>
+        <a href="/11r/404.html">404</a>
+      </li>
+
+      <li>
+        <a href="/11r/about">About</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-3xl p-8 grow">
+      
+    <p></p>
+    <div>
+        <h2>Ejercicios de modificación de parámetros del kérnel</h2>
+
+        
+
+        
+            <div class="mb-2">
+                <a class="tag ASO" href="/11r/tag/ASO">ASO</a>
+            </div>
+        
+
+        
+            
+                <p class="text-sm italic">Created on
+                    <span datetime="Tue Nov 08 2022 01:00:00 GMT+0100 (hora estándar de Europa central)">November 8, 2022</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+                <hr />
+
+                <h3>Table of Contents</h3>
+
+                <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#1.-deshabilita-apparmor-en-el-arranque.">1. Deshabilita apparmor en el arranque.</a>
+            		</li>
+
+                    <li><a href="#2.-deshabilita-si-es-posible-el-kernel-mode-setting-(ksm)-de-la-tarjeta-gr%C3%A1fica.">2. Deshabilita si es posible el Kernel Mode Setting (KSM) de la tarjeta gráfica.</a>
+            		</li>
+
+                    <li><a href="#3.-cambia-provisionalmente-la-swappiness-para-que-la-swap-de-tu-equipo-se-active-cuando-se-use-m%C3%A1s-de-un-90%25-de-la-ram.">3. Cambia provisionalmente la swappiness para que la swap de tu equipo se active cuando se use más de un 90% de la RAM.</a>
+            		</li>
+
+                    <li><a href="#4.-haz-que-el-cambio-de-la-swappiness-sea-permanente.">4. Haz que el cambio de la swappiness sea permanente.</a>
+            		</li>
+
+                    <li><a href="#5.-muestra-el-valor-del-bit-de-forward-para-ipv6.">5. Muestra el valor del bit de forward para IPv6.</a>
+            		</li>
+
+                    <li><a href="#6.-deshabilita-completamente-las-magic-sysrq-en-el-arranque-y-vuelve-a-habilitarlas-despu%C3%A9s-de-reiniciar.">6. Deshabilita completamente las Magic Sysrq en el arranque y vuelve a habilitarlas después de reiniciar.</a>
+            		</li>
+                </ol>
+            </nav>
+
+                <hr />
+            
+
+            <h3 id="1.-deshabilita-apparmor-en-el-arranque." tabindex="-1">1. Deshabilita apparmor en el arranque.</h3>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> systemctl disable apparmor</code></pre>
+<h3 id="2.-deshabilita-si-es-posible-el-kernel-mode-setting-(ksm)-de-la-tarjeta-gr%C3%A1fica." tabindex="-1">2. Deshabilita si es posible el Kernel Mode Setting (KSM) de la tarjeta gráfica.</h3>
+<p>Viene desactivado por defecto ya que mi tarjeta gráfica es amd.</p>
+<h3 id="3.-cambia-provisionalmente-la-swappiness-para-que-la-swap-de-tu-equipo-se-active-cuando-se-use-m%C3%A1s-de-un-90%25-de-la-ram." tabindex="-1">3. Cambia provisionalmente la swappiness para que la swap de tu equipo se active cuando se use más de un 90% de la RAM.</h3>
+<p>Con el cat vemos el valor por defecto y con el siguiente comando lo cambiamos:</p>
+<p><img src="/img/ASO-P5.1.png" alt="img"></p>
+<h3 id="4.-haz-que-el-cambio-de-la-swappiness-sea-permanente." tabindex="-1">4. Haz que el cambio de la swappiness sea permanente.</h3>
+<p>Para hacer el cambio permanente, tenemos que editar el fichero <code>sysctl.conf</code>:</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">nano</span> /etc/sysctl.conf</code></pre>
+<p>añadimos la siguiente línea en el archivo:</p>
+<pre class="language-txt"><code class="language-txt">vm.swappiness = 90</code></pre>
+<h3 id="5.-muestra-el-valor-del-bit-de-forward-para-ipv6." tabindex="-1">5. Muestra el valor del bit de forward para IPv6.</h3>
+<p>cat /proc/sys/net/ipv6/conf/all/forwarding
+<img src="/img/ASO-P5.2.png" alt="img"></p>
+<h3 id="6.-deshabilita-completamente-las-magic-sysrq-en-el-arranque-y-vuelve-a-habilitarlas-despu%C3%A9s-de-reiniciar." tabindex="-1">6. Deshabilita completamente las Magic Sysrq en el arranque y vuelve a habilitarlas después de reiniciar.</h3>
+<p>Para deshabilitar las Magic Sysrq usamos el siguiente comando.</p>
+<pre class="language-bash"><code class="language-bash">$ sysctl -w kernel.sysrq<span class="token operator">=</span><span class="token number">0</span></code></pre>
+<p>Si lo queremos volver a activar simplemente lo ponemos a 1 de nuevo:</p>
+<pre class="language-bash"><code class="language-bash">$ sysctl -w kernel.sysrq<span class="token operator">=</span><span class="token number">1</span></code></pre>
+<h2 id="documento-realizado-por%3A" tabindex="-1"><strong>Documento realizado por:</strong></h2>
+<p>✒️ <strong>Alejandro Montes Delgado</strong> - <em>2º ASIR</em></p>
+
+        </div>
+    </div>
+
+    </main>
+    <footer class="bg-gray-900 pb-10">
+  <p class="block text-center text-sm mb-6">
+    Built by
+    <a target="_blank" href="https://github.com/reeseschultz">
+      Reese Schultz
+    </a>
+  </p>
+
+  <a class="block text-center text-sm" href="/11r/privacy-policy">Privacy Policy</a>
+</footer>
+    <div id="privacy-notice" style="height: 5em" class="sticky bottom-0 py-5 px-2 bg-gray-800 w-full flex justify-center">
+    <p class="px-2 text-sm self-center">By using this site, you agree that you have read and understand its <a href="/11r/privacy-policy">Privacy Policy</a>.</p>
+    <button aria-label="dismiss" style="height: 32px; width: 32px" class="flex justify-center align-center" id="privacy-notice-button-container">
+        <svg id="privacy-notice-button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg> 
+    </button>
+</div>
+
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/11r/assets/main.bundle.js"></script>
+  </body>
+</html>

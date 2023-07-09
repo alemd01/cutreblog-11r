@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
+    <meta itemprop="name" content="Compilar un Kernel linux a medida. | 11r">
+    <meta itemprop="description" content="En este articulo, veremos como compilar un kernel linux a medida.">
+
+    
+    <meta name="twitter:title" content="Compilar un Kernel linux a medida. | 11r">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="En este articulo, veremos como compilar un kernel linux a medida.">
+    <meta name="twitter:site" content="@ReeseCodes">
+    <meta name="twitter:creator" content="@ReeseCodes">
+    <meta name="twitter:image:src" content="https://reeseschultz.github.io/11r/twitter.jpg">
+
+    
+    <meta name="og:title" content="Compilar un Kernel linux a medida. | 11r">
+    <meta name="og:description" content="En este articulo, veremos como compilar un kernel linux a medida.">
+    <meta name="og:image" content="https://reeseschultz.github.io/11r/og.jpg">
+    <meta name="og:url" content="https://reeseschultz.github.io/11r/">
+    <meta name="og:site_name" content="11r">
+    <meta name="og:locale" content="en_GB">
+    <meta name="og:type" content="website">
+
+    <link rel="icon" type="image/x-icon" href="/11r/favicon.ico" />
+
+    <title>Compilar un Kernel linux a medida. | 11r</title>
+
+    <link rel="stylesheet" href="/11r/assets/main.bundle.css">
+
+    
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <p class="top-notice">
+    <a href="https://github.com/reeseschultz/11r">Get the template on GitHub!</a>
+</p>
+
+    <header>
+  <nav class="container mx-auto max-w-3xl px-8 pt-2 flex flex-wrap justify-between">
+    <div>
+      <h1>
+        <a href="/11r/">11r</a>
+      </h1>
+      <p>america&#39;s favorite eleventy blog template</p>
+    </div>
+
+    <ul class="flex flex-wrap sm:w-32 w-full mt-6 md:justify-between justify-evenly">
+      <li>
+        <a href="/11r/404.html">404</a>
+      </li>
+
+      <li>
+        <a href="/11r/about">About</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+    <main class="container mx-auto max-w-3xl p-8 grow">
+      
+    <p></p>
+    <div>
+        <h2>Compilar un Kernel linux a medida.</h2>
+
+        
+            <p class="excerpt">En este articulo, veremos como compilar un kernel linux a medida.</p>
+        
+
+        
+            <div class="mb-2">
+                <a class="tag ASO" href="/11r/tag/ASO">ASO</a>
+            </div>
+        
+
+        
+            
+              <p class="text-sm italic">Last updated on
+                    <span datetime="Thu Nov 10 2022 01:00:00 GMT+0100 (hora estándar de Europa central)">October 9, 2016</span>. Created on
+                    <span datetime="Thu Nov 10 2022 01:00:00 GMT+0100 (hora estándar de Europa central)">November 10, 2022</span>.</p>
+            
+        
+
+        <div class="content post">
+            
+
+            <p>Antes que nada, crearemos un directorio de trabajo, donde descargaremos el kérnel y trabajaremos con él.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> ~/kernel<br><span class="token builtin class-name">cd</span> ~/kernel</code></pre>
+<p>Instalamos las herramientas de compilación:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> build-essential qtbase5-dev</code></pre>
+<p>Añadimos al <code>sources.list</code> el repositorio de bullseye-backports y con el siguiente comando podremos ver las versiones disponibles del kernel:</p>
+<pre class="language-txt"><code class="language-txt">      ~/kernel$ sudo apt policy linux-source<br>linux-source:<br>  Instalados: (ninguno)<br>  Candidato:  5.10.149-2<br>  Tabla de versión:<br>     6.0.3-1~bpo11+1 100<br>        100 http://deb.debian.org/debian bullseye-backports/main amd64 Packages<br>     5.19.11-1~bpo11+1 100<br>        100 http://deb.debian.org/debian bullseye-backports/main amd64 Packages<br>     5.18.16-1~bpo11+1 100<br>        100 http://deb.debian.org/debian bullseye-backports/main amd64 Packages<br>     5.10.149-2 500<br>        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages<br>     5.10.140-1 500<br>        500 http://deb.debian.org/debian bullseye/main amd64 Packages<br>     5.10.136-1 500<br>        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages<br>     5.10.127-2 500<br>        500 http://deb.debian.org/debian bullseye/main amd64 Packages<br>        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages<br>     5.10.120-1 500<br>        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages<br>     5.10.113-1 500<br>        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages<br>     5.10.103-1 500<br>        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages</code></pre>
+<p>usaremos la versión del kernel 6.0.3.1. Para descargar el kernel con la versión que vamos a utilizar, usamos el siguiente comando:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> linux-source<span class="token operator">=</span><span class="token number">6.0</span>.3-1~bpo11+1</code></pre>
+<p>movemos a nuestro directorio el archivo que se ha descargado. A mí se me ha descargado en <em>/usr/src</em>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mv</span> /usr/src/linux-source-6.0.tar.xz ./</code></pre>
+<p>Tenemos que desempaquetarlo, para ello usaremos tar:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">tar</span> -xf ./linux-source-6.0.tar.xz</code></pre>
+<p>Como podemos ver, ya tenemos listo el kernel para trabajar con él.</p>
+<p><img src="/img/ASO-P6.1.png" alt="ASO-P6.1.png"></p>
+<p>A la hora de compilar el kernel, necesitamos el archivo .config el cual se van a cargar de forma estática los modulos del kernel. Cogeremos de referencia el <code>.config</code> de nuestro kernel. Ejecutaremos el siguiente comando para ello:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">make</span> oldconfig</code></pre>
+<p>Al ejecutar el make, nos pregunta si queremos incluir componentes adicionales, como la idea es hacer el kernel lo más pequeño posible, le daremos a todo que no. Como podemos ver, en el primer comando muestra los módulos que se han enlazado estáticamente(=y) y el segundo los que se han enlazado dinámicamente(=m).</p>
+<p><img src="/img/ASO-P6.2.png" alt="ASO-P6.2.png"></p>
+<p>Como podemos apreciar son un total de unos 5700 módulos enlazados, para seguir quitando módulos, usaremos el siguiente comando para quitar aquellos que no están activos:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">make</span> localmodconfig</code></pre>
+<p>Cuando se ejecuta el comando, vuelve a preguntar si queremos enlazar algun componente, para seguir descartando componentes, le he seguido dando a no. Volvemos a contar cuantos módulos tenemos:</p>
+<p><img src="/img/ASO-P6.3.png" alt="ASO-P6.3.png"></p>
+<p>Ahora, ya tenemos menos de 2000 módulos enlazados, sigue siendo una cantidad alta pero hemos reducido a más de la mitad los módulos enlazados.</p>
+<p>Dicho esto, empezaremos nuestra primera compilación, así verificaremos que funciona todo.</p>
+<pre class="language-bash"><code class="language-bash">alemd@debian:~/kernel/linux-source-6.0$ <span class="token function">make</span> -j4 bindeb-pkg<br>  SYNC    include/config/auto.conf.cmd<br>  UPD     include/config/kernel.release<br><span class="token function">sh</span> ./scripts/package/mkdebian<br>dpkg-buildpackage -r<span class="token string">"fakeroot -u"</span> -a<span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> debian/arch<span class="token variable">)</span></span>  -b -nc -uc<br>dpkg-buildpackage: información: paquete fuente linux-upstream<br>dpkg-buildpackage: información: versión de las fuentes <span class="token number">6.0</span>.3-1<br>dpkg-buildpackage: información: distribución de las fuentes bullseye<br>dpkg-buildpackage: información: fuentes modificadas por alemd <span class="token operator">&lt;</span>alemd@debian<span class="token operator">></span><br>dpkg-buildpackage: información: arquitectura del sistema amd64<br> dpkg-source --before-build <span class="token builtin class-name">.</span><br> debian/rules binary<br><span class="token function">make</span> <span class="token assign-left variable">KERNELRELEASE</span><span class="token operator">=</span><span class="token number">6.0</span>.3 <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>x86 	<span class="token assign-left variable">KBUILD_BUILD_VERSION</span><span class="token operator">=</span><span class="token number">1</span> -f ./Makefile<br>  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_32.h<br>  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_64.h<br>  WRAP    arch/x86/include/generated/uapi/asm/bpf_perf_event.h<br>  WRAP    arch/x86/include/generated/uapi/asm/errno.h<br>  HOSTCC  arch/x86/tools/relocs_32.o<br>  WRAP    arch/x86/include/generated/uapi/asm/fcntl.h<br>  WRAP    arch/x86/include/generated/uapi/asm/ioctl.h<br>  WRAP    arch/x86/include/generated/uapi/asm/ioctls.h<br>  WRAP    arch/x86/include/generated/uapi/asm/ipcbuf.h<br>  WRAP    arch/x86/include/generated/uapi/asm/param.h<br>  WRAP    arch/x86/include/generated/uapi/asm/poll.h<br>  WRAP    arch/x86/include/generated/uapi/asm/resource.h<br></code></pre>
+<p>Una vez compilado el kernel, instalaremos el paquete .deb que se ha generado con el siguiente comando:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> dpkg -i <span class="token punctuation">..</span>/linux-image-6.0.3_6.0.3-1_amd64.deb</code></pre>
+<p>Ahora que está instalado el kernel, probaremos que funciona, para ello tendremos que reiniciar nuestra máquina y en <em>Advanced Options for Debian GNU/Linux</em> seleccionaremos el nuevo kernel. Probaremos que todo funciona correctamente y volveremos a reiniciar y entraremos con el kernel que usamos habitualmente. Como podemos comprobar después de reiniciar, estamos usando el kernel 6.0.3.</p>
+<p><img src="/img/ASO-P6.4.png" alt="ASO-P6.4.png"></p>
+<p>Ahora, realizaremos una nueva compilación y antes que nada, eliminaremos los ficheros residuales de la compilación. Para ello utilizaremos el siguiente comando.</p>
+<p><img src="/img/ASO-P6.5.png" alt="ASO-P6.5.png"></p>
+<p>Para esta compilación, no vamos a usar los parametros <em>oldconfig</em> ni <em>localmodconfig</em>, usaremos <em>xconfig</em> que es una aplicación gráfica para instalar los componentes a mano. Primero que nada instalaremos una dependencia:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> pkg-config</code></pre>
+<p>Ahora procederemos a hacer el make xconfig, nos aparecerá una ventana como la de la siguiente imagen y simplemente tenemos que quitar los módulos que no vayamos a usar en el kernel desenmarcando las casillas. Es un proceso largo y lento pero es sencillo de hacer.</p>
+<p><img src="/img/ASO-P6.6.png" alt="ASO-P6.6.png"></p>
+<p>Volvemos a contar cuantos módulos tiene el kernel:</p>
+<p><img src="/img/ASO-P6.7.png" alt="ASO-P6.7.png"></p>
+<h2 id="documento-realizado-por%3A" tabindex="-1"><strong>Documento realizado por:</strong></h2>
+<p>✒️ <strong>Alejandro Montes Delgado</strong> - <em>2º ASIR</em></p>
+
+        </div>
+            <p class="uppercase text-xs mt-6">Previous</p>
+
+            <p class="font-bold">
+                <a href="/11r/post/prueba2/">Prueba2</a>
+            </p>
+        
+    </div>
+
+    </main>
+    <footer class="bg-gray-900 pb-10">
+  <p class="block text-center text-sm mb-6">
+    Built by
+    <a target="_blank" href="https://github.com/reeseschultz">
+      Reese Schultz
+    </a>
+  </p>
+
+  <a class="block text-center text-sm" href="/11r/privacy-policy">Privacy Policy</a>
+</footer>
+    <div id="privacy-notice" style="height: 5em" class="sticky bottom-0 py-5 px-2 bg-gray-800 w-full flex justify-center">
+    <p class="px-2 text-sm self-center">By using this site, you agree that you have read and understand its <a href="/11r/privacy-policy">Privacy Policy</a>.</p>
+    <button aria-label="dismiss" style="height: 32px; width: 32px" class="flex justify-center align-center" id="privacy-notice-button-container">
+        <svg id="privacy-notice-button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/></svg> 
+    </button>
+</div>
+
+    <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="/11r/assets/main.bundle.js"></script>
+  </body>
+</html>

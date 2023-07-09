@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>11r</title>
+	<subtitle>america&#39;s favorite eleventy blog template</subtitle>
+	
+	<link href="https://reeseschultz.github.io/11r/feed/feed.xml" rel="self"/>
+	<link href="https://reeseschultz.github.io"/>
+	<updated>2022-11-10T00:00:00Z</updated>
+	<id>https://example.com/</id>
+	<author> 
+		<name>Reese Schultz</name>
+	</author>
+	
+	<entry>
+		<title>Compilar un Kernel linux a medida.</title>
+		<link href="https://reeseschultz.github.io/11r/post/compilar-un-kernel-linux-a-medida./"/>
+		<updated>2022-11-10T00:00:00Z</updated>
+		<id>https://reeseschultz.github.io/11r/post/compilar-un-kernel-linux-a-medida./</id>
+		<content type="html">&lt;p&gt;Antes que nada, crearemos un directorio de trabajo, donde descargaremos el kérnel y trabajaremos con él.&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;mkdir&lt;/span&gt; ~/kernel&lt;br /&gt;&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; ~/kernel&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instalamos las herramientas de compilación:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; build-essential qtbase5-dev&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Añadimos al &lt;code&gt;sources.list&lt;/code&gt; el repositorio de bullseye-backports y con el siguiente comando podremos ver las versiones disponibles del kernel:&lt;/p&gt;
+&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;      ~/kernel$ sudo apt policy linux-source&lt;br /&gt;linux-source:&lt;br /&gt;  Instalados: (ninguno)&lt;br /&gt;  Candidato:  5.10.149-2&lt;br /&gt;  Tabla de versión:&lt;br /&gt;     6.0.3-1~bpo11+1 100&lt;br /&gt;        100 http://deb.debian.org/debian bullseye-backports/main amd64 Packages&lt;br /&gt;     5.19.11-1~bpo11+1 100&lt;br /&gt;        100 http://deb.debian.org/debian bullseye-backports/main amd64 Packages&lt;br /&gt;     5.18.16-1~bpo11+1 100&lt;br /&gt;        100 http://deb.debian.org/debian bullseye-backports/main amd64 Packages&lt;br /&gt;     5.10.149-2 500&lt;br /&gt;        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages&lt;br /&gt;     5.10.140-1 500&lt;br /&gt;        500 http://deb.debian.org/debian bullseye/main amd64 Packages&lt;br /&gt;     5.10.136-1 500&lt;br /&gt;        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages&lt;br /&gt;     5.10.127-2 500&lt;br /&gt;        500 http://deb.debian.org/debian bullseye/main amd64 Packages&lt;br /&gt;        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages&lt;br /&gt;     5.10.120-1 500&lt;br /&gt;        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages&lt;br /&gt;     5.10.113-1 500&lt;br /&gt;        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages&lt;br /&gt;     5.10.103-1 500&lt;br /&gt;        500 http://security.debian.org/debian-security bullseye-security/main amd64 Packages&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;usaremos la versión del kernel 6.0.3.1. Para descargar el kernel con la versión que vamos a utilizar, usamos el siguiente comando:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; linux-source&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;6.0&lt;/span&gt;.3-1~bpo11+1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;movemos a nuestro directorio el archivo que se ha descargado. A mí se me ha descargado en &lt;em&gt;/usr/src&lt;/em&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;mv&lt;/span&gt; /usr/src/linux-source-6.0.tar.xz ./&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Tenemos que desempaquetarlo, para ello usaremos tar:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;tar&lt;/span&gt; -xf ./linux-source-6.0.tar.xz&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Como podemos ver, ya tenemos listo el kernel para trabajar con él.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://reeseschultz.github.io/img/ASO-P6.1.png&quot; alt=&quot;ASO-P6.1.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;A la hora de compilar el kernel, necesitamos el archivo .config el cual se van a cargar de forma estática los modulos del kernel. Cogeremos de referencia el &lt;code&gt;.config&lt;/code&gt; de nuestro kernel. Ejecutaremos el siguiente comando para ello:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt; oldconfig&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Al ejecutar el make, nos pregunta si queremos incluir componentes adicionales, como la idea es hacer el kernel lo más pequeño posible, le daremos a todo que no. Como podemos ver, en el primer comando muestra los módulos que se han enlazado estáticamente(=y) y el segundo los que se han enlazado dinámicamente(=m).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://reeseschultz.github.io/img/ASO-P6.2.png&quot; alt=&quot;ASO-P6.2.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Como podemos apreciar son un total de unos 5700 módulos enlazados, para seguir quitando módulos, usaremos el siguiente comando para quitar aquellos que no están activos:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt; localmodconfig&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Cuando se ejecuta el comando, vuelve a preguntar si queremos enlazar algun componente, para seguir descartando componentes, le he seguido dando a no. Volvemos a contar cuantos módulos tenemos:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://reeseschultz.github.io/img/ASO-P6.3.png&quot; alt=&quot;ASO-P6.3.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Ahora, ya tenemos menos de 2000 módulos enlazados, sigue siendo una cantidad alta pero hemos reducido a más de la mitad los módulos enlazados.&lt;/p&gt;
+&lt;p&gt;Dicho esto, empezaremos nuestra primera compilación, así verificaremos que funciona todo.&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;alemd@debian:~/kernel/linux-source-6.0$ &lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt; -j4 bindeb-pkg&lt;br /&gt;  SYNC    include/config/auto.conf.cmd&lt;br /&gt;  UPD     include/config/kernel.release&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;sh&lt;/span&gt; ./scripts/package/mkdebian&lt;br /&gt;dpkg-buildpackage -r&lt;span class=&quot;token string&quot;&gt;&quot;fakeroot -u&quot;&lt;/span&gt; -a&lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;cat&lt;/span&gt; debian/arch&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;  -b -nc -uc&lt;br /&gt;dpkg-buildpackage: información: paquete fuente linux-upstream&lt;br /&gt;dpkg-buildpackage: información: versión de las fuentes &lt;span class=&quot;token number&quot;&gt;6.0&lt;/span&gt;.3-1&lt;br /&gt;dpkg-buildpackage: información: distribución de las fuentes bullseye&lt;br /&gt;dpkg-buildpackage: información: fuentes modificadas por alemd &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;alemd@debian&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;br /&gt;dpkg-buildpackage: información: arquitectura del sistema amd64&lt;br /&gt; dpkg-source --before-build &lt;span class=&quot;token builtin class-name&quot;&gt;.&lt;/span&gt;&lt;br /&gt; debian/rules binary&lt;br /&gt;&lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;token assign-left variable&quot;&gt;KERNELRELEASE&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;6.0&lt;/span&gt;.3 &lt;span class=&quot;token assign-left variable&quot;&gt;ARCH&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;x86 	&lt;span class=&quot;token assign-left variable&quot;&gt;KBUILD_BUILD_VERSION&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; -f ./Makefile&lt;br /&gt;  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_32.h&lt;br /&gt;  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_64.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/bpf_perf_event.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/errno.h&lt;br /&gt;  HOSTCC  arch/x86/tools/relocs_32.o&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/fcntl.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/ioctl.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/ioctls.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/ipcbuf.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/param.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/poll.h&lt;br /&gt;  WRAP    arch/x86/include/generated/uapi/asm/resource.h&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Una vez compilado el kernel, instalaremos el paquete .deb que se ha generado con el siguiente comando:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; dpkg -i &lt;span class=&quot;token punctuation&quot;&gt;..&lt;/span&gt;/linux-image-6.0.3_6.0.3-1_amd64.deb&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ahora que está instalado el kernel, probaremos que funciona, para ello tendremos que reiniciar nuestra máquina y en &lt;em&gt;Advanced Options for Debian GNU/Linux&lt;/em&gt; seleccionaremos el nuevo kernel. Probaremos que todo funciona correctamente y volveremos a reiniciar y entraremos con el kernel que usamos habitualmente. Como podemos comprobar después de reiniciar, estamos usando el kernel 6.0.3.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://reeseschultz.github.io/img/ASO-P6.4.png&quot; alt=&quot;ASO-P6.4.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Ahora, realizaremos una nueva compilación y antes que nada, eliminaremos los ficheros residuales de la compilación. Para ello utilizaremos el siguiente comando.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://reeseschultz.github.io/img/ASO-P6.5.png&quot; alt=&quot;ASO-P6.5.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Para esta compilación, no vamos a usar los parametros &lt;em&gt;oldconfig&lt;/em&gt; ni &lt;em&gt;localmodconfig&lt;/em&gt;, usaremos &lt;em&gt;xconfig&lt;/em&gt; que es una aplicación gráfica para instalar los componentes a mano. Primero que nada instalaremos una dependencia:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;apt&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; pkg-config&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ahora procederemos a hacer el make xconfig, nos aparecerá una ventana como la de la siguiente imagen y simplemente tenemos que quitar los módulos que no vayamos a usar en el kernel desenmarcando las casillas. Es un proceso largo y lento pero es sencillo de hacer.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://reeseschultz.github.io/img/ASO-P6.6.png&quot; alt=&quot;ASO-P6.6.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Volvemos a contar cuantos módulos tiene el kernel:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://reeseschultz.github.io/img/ASO-P6.7.png&quot; alt=&quot;ASO-P6.7.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;documento-realizado-por%3A&quot; tabindex=&quot;-1&quot;&gt;&lt;strong&gt;Documento realizado por:&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;✒️ &lt;strong&gt;Alejandro Montes Delgado&lt;/strong&gt; - &lt;em&gt;2º ASIR&lt;/em&gt;&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Prueba2</title>
+		<link href="https://reeseschultz.github.io/11r/post/prueba2/"/>
+		<updated>2016-10-09T00:00:00Z</updated>
+		<id>https://reeseschultz.github.io/11r/post/prueba2/</id>
+		<content type="html">&lt;p&gt;Esto es la prueba 2&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Prueba3</title>
+		<link href="https://reeseschultz.github.io/11r/post/prueba3/"/>
+		<updated>2016-10-03T00:00:00Z</updated>
+		<id>https://reeseschultz.github.io/11r/post/prueba3/</id>
+		<content type="html">&lt;p&gt;otra prueba mas
+Esto es la prueba 2&lt;/p&gt;
+</content>
+	</entry>
+</feed>
